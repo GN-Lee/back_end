@@ -1,0 +1,12 @@
+{
+  "name": "cafe",
+  "version": "1.0.0",
+  "description": "회사 짤려서 카페운영함...",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "install": "pkg index.js --target node18-win-x64"
+  },
+  "author": "GN",
+  "license": "ISC"
+}
