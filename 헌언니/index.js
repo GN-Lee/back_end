@@ -42,7 +42,7 @@ const csvWriter = createObjectCsvWriter({
   ],
 });
 
-const data = Array(100)
+const data = Array(10000)
   .fill(0)
   .map((v, i) => {
     return {
