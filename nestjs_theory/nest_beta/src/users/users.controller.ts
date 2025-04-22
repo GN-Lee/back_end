@@ -5,6 +5,7 @@ import {
   DefaultValuePipe,
   ForbiddenException,
   Get,
+  NotFoundException,
   Param,
   ParseBoolPipe,
   ParseEnumPipe,
@@ -20,6 +21,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { EmailPipe } from 'src/email/email.pipe';
 import { BreadPipe } from 'src/bread/bread.pipe';
 import { NotFoundError } from 'rxjs';
+import { BroException } from 'src/all/bro';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 enum LolPostion {
   TOP = 'Top',
@@ -29,10 +32,13 @@ enum LolPostion {
   BOTTOM = 'Bottom',
 }
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiOperation({ summary: '김씨 찾기' })
+  @ApiResponse({ status: 200, description: '김씨를 찾아부러쓰' })
   @Get('/kim/:id')
   findKim(@Param('id', ParseIntPipe) id: number) {
     return { id };
@@ -90,7 +96,16 @@ export class UsersController {
 
   @Get('/jiheon')
   findJiheon() {
-    throw new UnauthorizedException('아니 형 이게 맞아????');
-    return { name: '지헌이형' };
+    throw new BroException('아니 형 이게 맞는거야??', 400);
+  }
+
+  @Get('/right')
+  findRight() {
+    throw new BadRequestException('극우 현서ㄷㄷ;;');
+  }
+
+  @Get('/well')
+  findWell() {
+    throw new NotFoundException('잘하자 준타이야....');
   }
 }
